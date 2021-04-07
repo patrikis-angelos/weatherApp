@@ -72,7 +72,7 @@ const createReport = (report) => {
 const createError = () => {
   const err = document.querySelector('#error');
   err.textContent = 'Location not Found';
-}
+};
 
 const onSubmit = (e) => {
   e.preventDefault();
@@ -83,8 +83,7 @@ const onSubmit = (e) => {
   const report = weather.getInfo(data);
   report.then((value) => {
     createReport(value.getReport());
-  })
-  .catch (() => {
+  }).catch(() => {
     createError();
   });
 };

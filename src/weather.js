@@ -10,8 +10,8 @@ async function getWeather(city) {
   try {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherKey}`, { mode: 'cors' }); // eslint-disable-line
     return response.json();
-  } catch(error) {
-    return;
+  } catch (error) {
+    return error;
   }
 }
 
@@ -29,7 +29,7 @@ async function getInfo(data) {
     );
     return report;
   } catch (error) {
-    return;
+    return error;
   }
 }
 
