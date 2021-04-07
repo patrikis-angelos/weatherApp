@@ -1,5 +1,7 @@
-const Weather = (name, country, desc, temp, humidity, speed) => {
-  const getReport = () => [name, country, desc, temp, humidity, speed];
+const Weather = (name, country, desc, temp, humidity, speed, icon) => {
+  const getTempC = () => Math.round(temp) - 272;
+  const getSpeed = () => (speed*1.150779).toFixed(2);
+  const getReport = () => [name, country, desc, getTempC(), humidity, getSpeed(), icon];
 
   return {getReport}
 };
@@ -17,7 +19,8 @@ async function getInfo(data) {
     info.weather[0].description,
     info.main.temp,
     info.main.humidity,
-    info.wind.speed);
+    info.wind.speed,
+    info.weather[0].icon);
   return report;
 }
 
