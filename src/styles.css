@@ -3,7 +3,8 @@
 }
 
 .border {
-  border: 2px solid black;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .form {
@@ -16,11 +17,13 @@
 .submit {
   padding: 10px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .input {
   width: 80%;
   padding: 10px;
+  border-radius: 5px;
 }
 
 .input:focus {
