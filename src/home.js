@@ -106,7 +106,7 @@ const createForm = () => {
   celsius.value = 'celsius';
   const fahrenheit = document.createElement('option');
   fahrenheit.textContent = 'Fahrenheit';
-  fahrenheit.value = 'fahrenheit'
+  fahrenheit.value = 'fahrenheit';
   tempType.appendChild(celsius);
   tempType.appendChild(fahrenheit);
   const submit = document.createElement('button');

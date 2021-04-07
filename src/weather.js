@@ -1,14 +1,13 @@
 const Weather = (name, country, desc, temp, humidity, speed, icon) => {
   const getTempC = () => Math.round(temp) - 272;
-  const getTempF = () => Math.round(temp*9/5 - 459.67);
+  const getTempF = () => Math.round(temp * 1.8 - 459.67);
   const getSpeed = () => (speed * 1.150779).toFixed(2);
   const getReport = (type) => {
     if (type === 'celsius') {
       return [name, country, desc, getTempC(), humidity, getSpeed(), icon];
-    } else {
-      return [name, country, desc, getTempF(), humidity, getSpeed(), icon];
     }
-  }
+    return [name, country, desc, getTempF(), humidity, getSpeed(), icon];
+  };
 
   return { getReport };
 };
