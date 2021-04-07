@@ -1,15 +1,5 @@
 import * as weather from './weather';
 
-const onSubmit = (e) => {
-  e.preventDefault();
-  const city = document.querySelector('#city').value;
-  const data = weather.getWeather(city);
-  const report = weather.getInfo(data);
-  report.then((value) => {
-    createReport(value.getReport());
-  })
-}
-
 const createTemp = (temperature) => {
   const temp = document.createElement('span');
   temp.textContent = temperature;
@@ -22,20 +12,20 @@ const createTemp = (temperature) => {
   text.appendChild(sup);
   text.appendChild(c);
   text.classList.add('temp');
-  return text
-}
+  return text;
+};
 
 const createReport = (report) => {
-  const [name, country, desc, temp, humidity, speed, icon] = report
+  const [name, country, desc, temp, humidity, speed, icon] = report;
   const weather = document.querySelector('.weather');
   weather.innerHTML = '';
 
   const nameContainer = document.createElement('div');
   const nameDiv = document.createElement('div');
   nameDiv.textContent = name;
-  nameDiv.classList.add('m-right-10', 'name')
+  nameDiv.classList.add('m-right-10', 'name');
   const countryDiv = document.createElement('div');
-  countryDiv.textContent = country
+  countryDiv.textContent = country;
   countryDiv.classList.add('country');
   nameContainer.appendChild(nameDiv);
   nameContainer.appendChild(countryDiv);
@@ -56,14 +46,14 @@ const createReport = (report) => {
   detailsContainer.appendChild(iconDiv);
 
   const detailsDiv = document.createElement('div');
-  detailsDiv.classList.add('flex', 'column', 'center', 'align-start')
+  detailsDiv.classList.add('flex', 'column', 'center', 'align-start');
   const descDiv = document.createElement('div');
-  descDiv.classList.add('m-bot-10')
+  descDiv.classList.add('m-bot-10');
   let capitalized = desc.charAt(0).toUpperCase();
   capitalized = capitalized.concat(desc.slice(1));
   descDiv.textContent = capitalized;
   const humidityDiv = document.createElement('div');
-  humidityDiv.classList.add('m-bot-10')
+  humidityDiv.classList.add('m-bot-10');
   humidityDiv.textContent = `Humidity: ${humidity}%`;
   const speedDiv = document.createElement('div');
   speedDiv.textContent = `Wind speed: ${speed} MPH`;
@@ -75,23 +65,33 @@ const createReport = (report) => {
   weather.appendChild(nameContainer);
   weather.appendChild(tempDiv);
   weather.appendChild(detailsContainer);
-}
+};
+
+const onSubmit = (e) => {
+  e.preventDefault();
+  const city = document.querySelector('#city').value;
+  const data = weather.getWeather(city);
+  const report = weather.getInfo(data);
+  report.then((value) => {
+    createReport(value.getReport());
+  });
+};
 
 const createForm = () => {
   const form = document.createElement('form');
-  form.classList.add('border', 'form', 'flex', 'space-between')
+  form.classList.add('border', 'form', 'flex', 'space-between');
   const cityInput = document.createElement('input');
-  cityInput.classList.add('no-border', 'input')
+  cityInput.classList.add('no-border', 'input');
   cityInput.id = 'city';
   cityInput.type = 'text';
   cityInput.placeholder = 'Search city';
   const submit = document.createElement('button');
   submit.type = 'submit';
-  submit.classList.add('submit','no-border', "fas", "fa-search");
+  submit.classList.add('submit', 'no-border', 'fas', 'fa-search');
   submit.onclick = onSubmit.bind(this);
   form.appendChild(cityInput);
   form.appendChild(submit);
   return form;
-}
+};
 
 export default createForm;

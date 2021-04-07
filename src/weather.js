@@ -1,13 +1,13 @@
 const Weather = (name, country, desc, temp, humidity, speed, icon) => {
   const getTempC = () => Math.round(temp) - 272;
-  const getSpeed = () => (speed*1.150779).toFixed(2);
+  const getSpeed = () => (speed * 1.150779).toFixed(2);
   const getReport = () => [name, country, desc, getTempC(), humidity, getSpeed(), icon];
 
-  return {getReport}
+  return { getReport };
 };
 
 async function getWeather(city) {
-  const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_key}`, {mode: 'cors'})
+  const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherKey}`, { mode: 'cors' }); // eslint-disable-line
   return response.json();
 }
 
@@ -20,9 +20,10 @@ async function getInfo(data) {
     info.main.temp,
     info.main.humidity,
     info.wind.speed,
-    info.weather[0].icon);
+    info.weather[0].icon,
+  );
   return report;
 }
 
 export default getWeather;
-export {getWeather, getInfo};
+export { getWeather, getInfo };
