@@ -15,7 +15,9 @@ const Weather = (name, country, desc, temp, humidity, speed, icon) => {
 async function getWeather(city) {
   try {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherKey}`, { mode: 'cors' }); // eslint-disable-line
-    return response.json();
+    if (response.ok) {
+      return response.json();
+    }
   } catch (error) {
     return null;
   }

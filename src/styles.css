@@ -9,9 +9,18 @@
 
 .form {
   margin-top: 80px;
+}
+
+.form-container {
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
+  width: 30%;
+}
+
+.select {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .submit {

@@ -91,6 +91,8 @@ const onSubmit = (e) => {
 };
 
 const createForm = () => {
+  const formContainer = document.createElement('div');
+  formContainer.classList.add('form-container');
   const form = document.createElement('form');
   form.classList.add('border', 'form', 'flex', 'space-between');
   const cityInput = document.createElement('input');
@@ -99,6 +101,7 @@ const createForm = () => {
   cityInput.type = 'text';
   cityInput.placeholder = 'Search city';
   const tempType = document.createElement('select');
+  tempType.classList.add('select');
   tempType.name = 'temps';
   tempType.id = 'temps';
   const celsius = document.createElement('option');
@@ -114,9 +117,10 @@ const createForm = () => {
   submit.classList.add('submit', 'no-border', 'fas', 'fa-search');
   submit.onclick = onSubmit.bind(this);
   form.appendChild(cityInput);
-  form.appendChild(tempType);
   form.appendChild(submit);
-  return form;
+  formContainer.appendChild(form);
+  formContainer.appendChild(tempType);
+  return formContainer;
 };
 
 export default createForm;
