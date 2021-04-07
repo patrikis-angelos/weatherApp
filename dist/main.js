@@ -70,13 +70,33 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 
 /***/ }),
 
+/***/ "./src/home.js":
+/*!*********************!*\
+  !*** ./src/home.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _weather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weather */ \"./src/weather.js\");\n\n\nconst createForm = () => {\n  const form = document.createElement('form');\n  form.classList.add('border', 'form', 'flex', 'space-between')\n  const cityInput = document.createElement('input');\n  cityInput.classList.add('no-border', 'input')\n  cityInput.id = 'city';\n  cityInput.type = 'text';\n  cityInput.placeholder = 'Search city';\n  const submit = document.createElement('button');\n  submit.type = 'submit';\n  submit.classList.add('submit','no-border', \"fas\", \"fa-search\");\n  submit.onclick = (e) => {\n    e.preventDefault();\n    const data = _weather__WEBPACK_IMPORTED_MODULE_0__.getWeather(cityInput.value);\n    const report = _weather__WEBPACK_IMPORTED_MODULE_0__.getInfo(data);\n    report.then((value) => {\n      value.getReport();\n    })\n  }\n  form.appendChild(cityInput);\n  form.appendChild(submit);\n  return form;\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createForm);\n\n//# sourceURL=webpack://weatherApp/./src/home.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _reset_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reset.css */ \"./src/reset.css\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\n\n\nconst content = document.querySelector('.content');\n\nconst Weather = (name, country, desc, temp, humidity, speed) => {\n    const getTemp = () => temp;\n\n    const getReport = () => console.log(`${name} ${country} ${desc} ${temp} ${humidity} ${speed}`);\n\n    return {getReport}\n};\n\nasync function getWeather(city) {\n  const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_key}`, {mode: 'cors'})\n  return response.json();\n}\n\nasync function getInfo(data) {\n  const info = await data;\n  const report = Weather(\n    info.name,\n    info.sys.country,\n    info.weather[0].description,\n    info.main.temp,\n    info.main.humidity,\n    info.wind.speed);\n  return report;\n}\n\nconst createForm = () => {\n  const form = document.createElement('form');\n  form.classList.add('border', 'form', 'flex', 'space-between')\n  const cityInput = document.createElement('input');\n  cityInput.classList.add('no-border', 'input')\n  cityInput.id = 'city';\n  cityInput.type = 'text';\n  cityInput.placeholder = 'Search city';\n  const submit = document.createElement('button');\n  submit.type = 'submit';\n  submit.classList.add('submit','no-border', \"fas\", \"fa-search\");\n  submit.onclick = (e) => {\n    e.preventDefault();\n    const data = getWeather(cityInput.value);\n    const report = getInfo(data);\n    report.then((value) => {\n      value.getReport();\n    })\n  }\n  form.appendChild(cityInput);\n  form.appendChild(submit);\n  return form;\n}\n\nconst form = createForm();\ncontent.appendChild(form);\n\n\n//# sourceURL=webpack://weatherApp/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _reset_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reset.css */ \"./src/reset.css\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home */ \"./src/home.js\");\n\n\n\n\nconst content = document.querySelector('.content');\n\nconst form = (0,_home__WEBPACK_IMPORTED_MODULE_2__.default)();\ncontent.appendChild(form);\n\n\n//# sourceURL=webpack://weatherApp/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/weather.js":
+/*!************************!*\
+  !*** ./src/weather.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   \"getWeather\": () => (/* binding */ getWeather),\n/* harmony export */   \"getInfo\": () => (/* binding */ getInfo)\n/* harmony export */ });\nconst Weather = (name, country, desc, temp, humidity, speed) => {\n  const getTemp = () => temp;\n\n  const getReport = () => console.log(`${name} ${country} ${desc} ${temp} ${humidity} ${speed}`);\n\n  return {getReport}\n};\n\nasync function getWeather(city) {\nconst response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weather_key}`, {mode: 'cors'})\nreturn response.json();\n}\n\nasync function getInfo(data) {\nconst info = await data;\nconst report = Weather(\n  info.name,\n  info.sys.country,\n  info.weather[0].description,\n  info.main.temp,\n  info.main.humidity,\n  info.wind.speed);\nreturn report;\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getWeather);\n\n\n//# sourceURL=webpack://weatherApp/./src/weather.js?");
 
 /***/ })
 
