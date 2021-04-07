@@ -1,0 +1,36 @@
+.no-border {
+  border: 0;
+}
+
+.border {
+  border: 2px solid black;
+}
+
+.form {
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+
+.submit {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.input {
+  width: 80%;
+  padding: 10px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
