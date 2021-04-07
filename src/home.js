@@ -18,7 +18,9 @@ const createTemp = (temperature) => {
 const createReport = (report) => {
   const [name, country, desc, temp, humidity, speed, icon] = report;
   const weather = document.querySelector('.weather');
+  const err = document.querySelector('#error');
   weather.innerHTML = '';
+  err.innerHTML = '';
 
   const nameContainer = document.createElement('div');
   const nameDiv = document.createElement('div');
@@ -67,13 +69,23 @@ const createReport = (report) => {
   weather.appendChild(detailsContainer);
 };
 
+const createError = () => {
+  const err = document.querySelector('#error');
+  err.textContent = 'Location not Found';
+}
+
 const onSubmit = (e) => {
   e.preventDefault();
+  const form = document.querySelector('form');
   const city = document.querySelector('#city').value;
+  form.reset();
   const data = weather.getWeather(city);
   const report = weather.getInfo(data);
   report.then((value) => {
     createReport(value.getReport());
+  })
+  .catch (() => {
+    createError();
   });
 };
 

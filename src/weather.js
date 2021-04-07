@@ -7,22 +7,30 @@ const Weather = (name, country, desc, temp, humidity, speed, icon) => {
 };
 
 async function getWeather(city) {
-  const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherKey}`, { mode: 'cors' }); // eslint-disable-line
-  return response.json();
+  try {
+    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WeatherKey}`, { mode: 'cors' }); // eslint-disable-line
+    return response.json();
+  } catch(error) {
+    return;
+  }
 }
 
 async function getInfo(data) {
-  const info = await data;
-  const report = Weather(
-    info.name,
-    info.sys.country,
-    info.weather[0].description,
-    info.main.temp,
-    info.main.humidity,
-    info.wind.speed,
-    info.weather[0].icon,
-  );
-  return report;
+  try {
+    const info = await data;
+    const report = Weather(
+      info.name,
+      info.sys.country,
+      info.weather[0].description,
+      info.main.temp,
+      info.main.humidity,
+      info.wind.speed,
+      info.weather[0].icon,
+    );
+    return report;
+  } catch (error) {
+    return;
+  }
 }
 
 export default getWeather;

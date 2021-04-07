@@ -85,3 +85,7 @@
 .weather-icon {
   width: 200px;
 }
+
+.error {
+  color: red;
+}
