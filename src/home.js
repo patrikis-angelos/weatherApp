@@ -1,21 +1,22 @@
 import * as weather from './weather';
 
-const createTemp = (temperature) => {
+const createTemp = (temperature, tempType) => {
   const temp = document.createElement('span');
   temp.textContent = temperature;
   const sup = document.createElement('sup');
   sup.textContent = 'o';
-  const c = document.createElement('span');
-  c.textContent = 'C';
+  const type = document.createElement('span');
+  const tempSymbol = tempType.charAt(0).toUpperCase();
+  type.textContent = tempSymbol;
   const text = document.createElement('p');
   text.appendChild(temp);
   text.appendChild(sup);
-  text.appendChild(c);
+  text.appendChild(type);
   text.classList.add('temp');
   return text;
 };
 
-const createReport = (report) => {
+const createReport = (report, tempType) => {
   const [name, country, desc, temp, humidity, speed, icon] = report;
   const weather = document.querySelector('.weather');
   const err = document.querySelector('#error');
@@ -34,7 +35,7 @@ const createReport = (report) => {
   nameContainer.classList.add('flex', 'center');
 
   const tempDiv = document.createElement('div');
-  const text = createTemp(temp);
+  const text = createTemp(temp, tempType);
   tempDiv.appendChild(text);
 
   const detailsContainer = document.createElement('div');
@@ -78,11 +79,12 @@ const onSubmit = (e) => {
   e.preventDefault();
   const form = document.querySelector('form');
   const city = document.querySelector('#city').value;
+  const tempType = document.querySelector('#temps').value;
   form.reset();
   const data = weather.getWeather(city);
   const report = weather.getInfo(data);
   report.then((value) => {
-    createReport(value.getReport());
+    createReport(value.getReport(tempType), tempType);
   }).catch(() => {
     createError();
   });
@@ -96,11 +98,23 @@ const createForm = () => {
   cityInput.id = 'city';
   cityInput.type = 'text';
   cityInput.placeholder = 'Search city';
+  const tempType = document.createElement('select');
+  tempType.name = 'temps';
+  tempType.id = 'temps';
+  const celsius = document.createElement('option');
+  celsius.textContent = 'Celsius';
+  celsius.value = 'celsius';
+  const fahrenheit = document.createElement('option');
+  fahrenheit.textContent = 'Fahrenheit';
+  fahrenheit.value = 'fahrenheit'
+  tempType.appendChild(celsius);
+  tempType.appendChild(fahrenheit);
   const submit = document.createElement('button');
   submit.type = 'submit';
   submit.classList.add('submit', 'no-border', 'fas', 'fa-search');
   submit.onclick = onSubmit.bind(this);
   form.appendChild(cityInput);
+  form.appendChild(tempType);
   form.appendChild(submit);
   return form;
 };
